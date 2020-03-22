@@ -1,20 +1,80 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="text-center"> 
+  <form [formGroup]='cityForm' class="searcher back ion-padding">
+    <ion-item class="center">
+      <ion-input required type="text" formControlName="city"></ion-input>
+      
+      <ion-button
+        icon-only
+        slot="end"
+        type="submit"
+        shape="round"
+        fill="clear"
+        (click)="getFullWeather()"
+        [disabled]="!cityForm.valid">
+        <ion-icon name="search-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <div class="error-messages">
+      <ng-container *ngFor="let error of errorMessages.city">
+        <div class="error-message" *ngIf="cityForm.get('city').hasError(error.type) && (cityForm.get('city').dirty || cityForm.get('city').touched)">
+          {{ error.message }}
+        </div>
+      </ng-container>
+    </div>
+  </form>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card 
+        *ngIf="fullWeather != null && fullWeatherDate != null"
+        [ngStyle]="{'background': cardColor}">
+      <ion-grid>
+        <ion-row>
+          <ion-col class="big-font ion-padding">
+            {{fullWeatherDate.hour | date: 'h:mm a'}}
+          </ion-col>
+          <ion-col class="small-font ion-padding ion-text-right ion-text-uppercase">
+              {{fullWeatherDate.date | date: 'MMM d'}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="big-font ion-padding ion-text-center ion-text-uppercase">
+            {{fullWeatherDate.description}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="giga-font ion-text-center">
+            <ion-icon [name]="cardIcon"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="ion-padding-start">
+            <span class="big-font">{{fullWeatherDate.temperature}}</span>
+            <span class="small-font">/{{fullWeatherDate.pressure}}</span>
+          </ion-col>
+          <ion-col class="big-font ion-padding-end ion-text-right ion-text-uppercase">
+            {{fullWeatherDate.city}}
+          </ion-col>
+        </ion-row>
+        <ion-item-divider></ion-item-divider>
+        <ion-row>
+          <ion-col class="med-font">
+            <ion-row>
+              <ion-icon class="large-font" name="sunrise"></ion-icon>
+              <ion-label>
+                {{fullWeatherDate.sunrise | date: 'h:mm a'}}
+              </ion-label>
+            </ion-row>
+          </ion-col>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+          <ion-col class="med-font">
+            <ion-row class="float-right ion-padding-end">
+              <ion-icon class="big-font icon-padding" name="sunset"></ion-icon>
+              <ion-label>
+                {{fullWeatherDate.sunset | date: 'h:mm a'}}
+              </ion-label>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-card>
+
 </ion-content>
