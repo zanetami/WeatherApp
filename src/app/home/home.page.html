@@ -1,7 +1,19 @@
-<ion-content class="text-center"> 
-  <form [formGroup]='cityForm' class="searcher back ion-padding">
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-title>
+        <ion-row>
+          Sprawdź swoje miasto
+          <ion-icon class="big-font title-icon" name="cloud-circle-outline"></ion-icon>
+        </ion-row>
+      </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="text-center">
+
+  <form [formGroup]='cityForm' class="searcher ion-padding">
     <ion-item class="center">
-      <ion-input required type="text" formControlName="city"></ion-input>
+      <ion-input class="med-font" required type="text" formControlName="city"></ion-input>
       
       <ion-button
         icon-only
@@ -40,8 +52,8 @@
             {{fullWeatherDate.description}}
           </ion-col>
         </ion-row>
-        <ion-row>
-          <ion-col class="giga-font ion-text-center">
+        <ion-row class="icon-height">
+          <ion-col class="giga-font icon-height ion-text-center" style="height: 200px">
             <ion-icon [name]="cardIcon"></ion-icon>
           </ion-col>
         </ion-row>

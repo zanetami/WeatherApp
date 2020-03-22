@@ -44,10 +44,6 @@ export class HomePage {
     mist: 'reorder-four-outline'
   };
 
-  colors = {
-
-  };
-
   constructor(
     private apiCalls: ApiCallService,
     private formBuilder: FormBuilder,
